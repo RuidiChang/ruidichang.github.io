@@ -56,7 +56,7 @@ aside{position:sticky;top:calc(40px + env(safe-area-inset-top,0px));align-self:s
 /* ---------- main ---------- */
 main{display:flex;flex-direction:column;gap:72px;min-width:0}
 section{min-width:0}
-.label{font:500 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.label{font:500 13px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
 section > .label{display:block;margin-bottom:14px}
 
 /* research statement */
@@ -75,16 +75,16 @@ section > .label{display:block;margin-bottom:14px}
 .axis .works{font-size:13.5px;color:var(--muted)}
 
 /* current project */
-.project{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:32px 34px;display:flex;flex-direction:column;gap:22px}
+.project{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:24px 26px;display:flex;flex-direction:column;gap:16px;font-size:15px}
 .chip{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:3px}
 .chip.multi{color:var(--multi);background:var(--multi-bg)}
 .chip.single{color:var(--single);background:var(--single-bg)}
-.project h2{font-size:28px;line-height:1.2}
+.project h2{font-size:23px;line-height:1.25}
 .project h2 span{color:var(--muted);font-weight:400}
-.project .q{font-family:var(--display);font-style:italic;font-size:20px;line-height:1.45;border-left:3px solid var(--multi);padding-left:16px;max-width:60ch}
+.project .q{font-family:var(--display);font-style:italic;font-size:17px;line-height:1.45;border-left:3px solid var(--multi);padding-left:16px;max-width:60ch}
 .project p{max-width:68ch}
 figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
-.diagram{overflow-x:auto;border:1px solid var(--line);border-radius:6px;padding:14px 10px 6px;background:var(--bg)}
+.diagram{overflow-x:auto;border:1px solid var(--line);border-radius:6px;padding:10px 8px 4px;background:var(--bg)}
 .diagram svg{display:block;width:100%;min-width:640px;height:auto;color:var(--ink)}
 figcaption{font-size:14px;color:var(--muted);max-width:72ch}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
@@ -96,32 +96,32 @@ figcaption{font-size:14px;color:var(--muted);max-width:72ch}
 /* publications */
 .pubhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:10px}
 .filters{display:flex;gap:6px}
-.filters button{font:500 12px/1 var(--mono);letter-spacing:.04em;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer}
+.filters button{font:500 13px/1 var(--mono);letter-spacing:.04em;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer}
 .filters button[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
 .filters button[data-f="single"][aria-pressed="true"]{background:var(--single);border-color:var(--single)}
 .filters button[data-f="multi"][aria-pressed="true"]{background:var(--multi);border-color:var(--multi)}
 .pubs{list-style:none;margin:0;padding:0}
-.pub{display:grid;grid-template-columns:62px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
-.pub .yr{font:500 13px/1.6 var(--mono);color:var(--faint);font-variant-numeric:tabular-nums}
+.pub{display:grid;grid-template-columns:62px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
+.pub .yr{font:500 14px/1.7 var(--mono);color:var(--faint);font-variant-numeric:tabular-nums}
 .pub .body{display:flex;flex-direction:column;gap:5px;min-width:0}
-.pub .t{font-family:var(--display);font-size:18.5px;line-height:1.35;font-weight:500}
+.pub .t{font-family:var(--display);font-size:20.5px;line-height:1.35;font-weight:500}
 .pub .t a{text-decoration:none}
 .pub .t a:hover{text-decoration:underline;text-decoration-color:currentColor}
-.pub .au{font-size:14.5px;color:var(--muted)}
+.pub .au{font-size:15.5px;color:var(--muted)}
 .pub .au b{color:var(--ink);font-weight:600}
-.pub .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
+.pub .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:15px}
 .pub .venue{font-weight:600}
-.pub .note{font-size:15px;max-width:66ch;margin-top:4px}
-.pub .thumb{margin-top:10px;max-width:520px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px}
+.pub .note{font-size:16px;max-width:66ch;margin-top:4px}
+.pub .thumb{margin-top:12px;max-width:600px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px}
 .pub .thumb img{display:block;width:100%;height:auto}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
 .dot.single{background:var(--single)} .dot.multi{background:var(--multi)}
 
 /* service */
-.svc{display:grid;grid-template-columns:120px 1fr;gap:10px 18px;font-size:15px}
-.svc dt{font:500 12px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.svc{display:grid;grid-template-columns:130px 1fr;gap:12px 18px;font-size:16px}
+.svc dt{font:500 13px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .svc dd{margin:0}
-footer{font-size:13px;color:var(--faint)}
+footer{font-size:14px;color:var(--faint)}
 
 @media (max-width: 860px){
   .wrap{grid-template-columns:1fr;gap:40px;padding-inline:20px;padding-block:32px 56px}
@@ -169,28 +169,28 @@ footer{font-size:13px;color:var(--faint)}
 
 <section id="research">
   <span class="label">Research</span>
-  <h1 class="thesis">I study how models work and how to make them better, as a <em class="s">single model</em> and as <em class="m">many models</em> working together.</h1>
+  <h1 class="thesis">I study how models work and how to make them better, as a <em class="s">single model</em> and as <em class="m">multiple agents</em> working together.</h1>
   <p class="bio">I'm a Ph.D. student in Computer Science at Rice University.</p>
   <div class="axes">
     <div class="axis">
       <div class="top"><svg class="glyph" viewBox="0 0 34 22" aria-hidden="true"><circle cx="17" cy="11" r="8" fill="none" stroke-width="2" style="stroke:var(--single)"/><circle cx="17" cy="11" r="3" style="fill:var(--single)"/></svg><h3>Single model</h3></div>
       <dl>
-        <dt>Understand</dt><dd>How information flows across layers, how reasoning is computed, and how neurons encode features.</dd>
-        <dt>Improve</dt><dd>Controlling models through their representations and memory during post-training.</dd>
+        <dt>Understand</dt><dd>How information flows flows, how reasoning is computed, and how neurons encode features.</dd>
+        <dt>Improve</dt><dd>Controlling models through their representations during post-training.</dd>
       </dl>
     </div>
     <div class="axis">
-      <div class="top"><svg class="glyph" viewBox="0 0 34 22" aria-hidden="true"><line x1="8" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="26" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="8" y1="15" x2="26" y2="15" stroke-width="1.6" style="stroke:var(--multi)"/><circle cx="17" cy="6" r="4" style="fill:var(--multi)"/><circle cx="8" cy="15" r="4" style="fill:var(--multi)"/><circle cx="26" cy="15" r="4" style="fill:var(--multi)"/></svg><h3>Multiple models</h3></div>
+      <div class="top"><svg class="glyph" viewBox="0 0 34 22" aria-hidden="true"><line x1="8" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="26" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="8" y1="15" x2="26" y2="15" stroke-width="1.6" style="stroke:var(--multi)"/><circle cx="17" cy="6" r="4" style="fill:var(--multi)"/><circle cx="8" cy="15" r="4" style="fill:var(--multi)"/><circle cx="26" cy="15" r="4" style="fill:var(--multi)"/></svg><h3>Multiple agents</h3></div>
       <dl>
-        <dt>Understand</dt><dd>When a team of language-model agents actually integrates the information its members hold.</dd>
-        <dt>Improve</dt><dd>Adapting each agent while it collaborates, so the team uses what it collectively knows.</dd>
+        <dt>Understand</dt><dd>When a team of agents integrates the information and solve a p[roblem together].</dd>
+        <dt>Improve</dt><dd>Improving collaborations between each agent.</dd>
       </dl>
     </div>
   </div>
 </section>
 
 <section id="current">
-  <span class="label">Current project</span>
+  <span class="label">Project</span>
   <div class="project">
     <span class="chip multi"><span class="dot multi"></span>Multi-agents</span>
     <h2>Collaborative Adaptation in Multi-agent System at Test-time</h2>
@@ -360,7 +360,7 @@ footer{font-size:13px;color:var(--faint)}
 
 <section id="publications">
   <div class="pubhead">
-    <span class="label">Publications</span>
+    <span class="label">Papers</span>
     <div class="filters" role="group" aria-label="Filter publications">
       <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
       <button type="button" id="f-single" data-f="single" aria-pressed="false">Single model</button>
@@ -415,7 +415,7 @@ footer{font-size:13px;color:var(--faint)}
       </div>
     </li>
     <li class="pub" data-k="single">
-      <span class="yr">—</span>
+      <span class="yr">2026</span>
       <div class="body">
         <p class="t"><a href="https://arxiv.org/pdf/2410.15580">Language Models are Symbolic Learners in Arithmetic</a></p>
         <p class="au">Chunyuan Deng, Zhiqi Li, Roy Xie, <b>Ruidi Chang</b>, Hanjie Chen</p>
