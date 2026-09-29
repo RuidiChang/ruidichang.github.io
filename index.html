@@ -169,7 +169,7 @@ footer{font-size:13px;color:var(--faint)}
 
 <section id="research">
   <span class="label">Research</span>
-  <h1 class="thesis">I study how language models work and how to make them better, as a <em class="s">single model</em> and as <em class="m">many models</em> working together.</h1>
+  <h1 class="thesis">I study how models work and how to make them better, as a <em class="s">single model</em> and as <em class="m">many models</em> working together.</h1>
   <p class="bio">I'm a Ph.D. student in Computer Science at Rice University.</p>
   <div class="axes">
     <div class="axis">
@@ -193,85 +193,169 @@ footer{font-size:13px;color:var(--faint)}
   <span class="label">Current project</span>
   <div class="project">
     <span class="chip multi"><span class="dot multi"></span>Multi-agents</span>
-    <h2>CAT: Collaborative Adaptation at Test-time</h2>
+    <h2>Collaborative Adaptation in Multi-agent System at Test-time</h2>
     <p>Multi-agent language-model systems must do more than divide a problem among several models. Their collective intelligence depends on how well the agents communicate with one another. Training during the task instead changes the collaborative behavior of the agents, like what it shares, what it asks its peers for, and how to folds its contributions into its further reasoning.</p>
-    <p class="q">Can training during the current task improve a collaborating team's performance beyond providing the same information in context?</p>
+    <p class="q">Can training during the current task improve a collaborating team's performance beyond providing information in context?</p>
 
     <figure>
       <div class="diagram">
-        <svg viewBox="0 0 960 372" role="img" aria-label="One CAT adaptation step for agent i: the frozen base model drafts and reviews a contribution from the agent's visible context to build a target, the target updates only agent i's adapter, and the adapted model then acts on the same context; the action goes to peers, whose replies re-enter the context only through communication.">
-          <defs>
-            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker>
-            <marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" style="fill:var(--multi)"/></marker>
-          </defs>
-          <!-- information boundary -->
-          <rect x="12" y="34" width="758" height="292" rx="10" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="5 5"/>
-          <text x="26" y="56" font-family="JetBrains Mono, monospace" font-size="12" fill="currentColor" fill-opacity=".7">AGENT i · sees only its own context</text>
-          <text x="400" y="62" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" fill="currentColor" fill-opacity=".6">adapter off · frozen θ₀</text>
-
-          <!-- context -->
-          <rect x="30" y="80" width="150" height="200" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
-          <text x="105" y="104" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">Visible context</text>
-          <text x="105" y="122" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="14" fill="currentColor">hᵢ,ₜ</text>
-          <g font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">
-            <text x="46" y="156">task instructions</text>
-            <text x="46" y="180">own documents</text>
-            <text x="46" y="204">messages received</text>
-            <text x="46" y="228">tool results</text>
-          </g>
-
-          <!-- top lane: build target with frozen base -->
-          <rect x="220" y="72" width="140" height="56" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
-          <text x="290" y="96" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ drafts</text>
-          <text x="290" y="114" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">contribution d</text>
-          <rect x="420" y="72" width="140" height="56" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
-          <text x="490" y="96" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ reviews d</text>
-          <text x="490" y="114" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">with instruction q</text>
-          <line x1="180" y1="100" x2="216" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
-          <line x1="360" y1="100" x2="416" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
-          <text x="388" y="92" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="13" fill="currentColor">d</text>
-
-          <!-- adapter update -->
-          <rect x="600" y="66" width="152" height="68" rx="6" stroke-width="1.8" style="fill:var(--multi-bg);stroke:var(--multi)"/>
-          <text x="676" y="90" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" style="fill:var(--multi)">Update adapter φᵢ</text>
-          <text x="676" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">teacher-forced loss</text>
-          <text x="676" y="124" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">≤ 256 positions</text>
-          <line x1="560" y1="100" x2="596" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
-          <text x="578" y="92" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="13" fill="currentColor">y</text>
-
-          <!-- updated adapter feeds the acting model -->
-          <polyline points="676,134 676,186 490,186 490,236" fill="none" stroke-width="1.8" marker-end="url(#ahm)" style="stroke:var(--multi)"/>
-          <text x="690" y="170" font-family="Literata, serif" font-style="italic" font-size="13" style="fill:var(--multi)">φᵢ⁺</text>
-
-          <!-- bottom lane: act with adapted model on the same context -->
-          <rect x="420" y="240" width="140" height="56" rx="6" stroke-width="1.8" style="fill:var(--paper);stroke:var(--multi)"/>
-          <text x="490" y="264" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ + φᵢ⁺ acts</text>
-          <text x="490" y="282" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">on the same hᵢ,ₜ</text>
-          <line x1="180" y1="268" x2="416" y2="268" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
-
-          <!-- peers -->
-          <rect x="806" y="226" width="140" height="84" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
-          <text x="876" y="252" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">Other agents</text>
-          <text x="876" y="270" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">own adapters φⱼ</text>
-          <text x="876" y="288" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">or tool environment</text>
-          <line x1="560" y1="268" x2="802" y2="268" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
-          <text x="682" y="260" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor">sends aᵢ,ₜ</text>
-
-          <!-- replies return only through communication -->
-          <polyline points="876,310 876,346 105,346 105,284" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>
-          <text x="490" y="364" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">replies enter hᵢ,ₜ₊₁ only when communicated</text>
+        <svg viewBox="0 0 960 414" role="img" aria-label="Illustrative example. Three agents each hold a private calendar and must find a day all are free. Left, information is only shared in context: agent A receives the messages from B and C but still answers Tuesday, ignoring that C is only free Wednesday. Right, with CAT each agent’s adapter is trained during the task, and A answers Wednesday.">
+          <defs><marker id="tz" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor" fill-opacity=".6"/></marker></defs>
+          <rect x="286" y="8" width="388" height="36" rx="18" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <text x="480" y="31" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13.5" fill="currentColor"><tspan font-weight="700">Task:</tspan> find a day all three agents are free</text>
+          <rect x="10" y="58" width="460" height="346" rx="18" fill="currentColor" fill-opacity=".045"/>
+          <text x="240" y="88" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="15" font-weight="700" fill="currentColor">Share information in context</text>
+          <rect x="182" y="118" width="168" height="36" rx="14" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <path d="M349 129.0 L362 136 L349 143.0" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="266.0" y="141.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">I’m free Tue and Wed.</text>
+          <rect x="182" y="252" width="168" height="36" rx="14" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <path d="M349 263.0 L362 270 L349 277.0" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="266.0" y="275.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">Only Wed works for me!</text>
+          <line x1="178" y1="142" x2="138" y2="186" stroke="currentColor" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tz)"/>
+          <line x1="178" y1="270" x2="142" y2="226" stroke="currentColor" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tz)"/>
+          <line x1="105" y1="165" x2="105" y2="156" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="105" cy="153" r="4.5" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="81" y="165" width="48" height="37" rx="11" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="96" cy="180" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="97" cy="181" r="2.4" fill="#2B2F38"/>
+          <circle cx="114" cy="180" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="115" cy="181" r="2.4" fill="#2B2F38"/>
+          <circle cx="89" cy="191" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="121" cy="191" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M99 191 Q105 196 111 191" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="88" y="204" width="34" height="18" rx="7" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="105" y="238" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent A</text>
+          <rect x="78" y="246" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="86" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="97" y="246" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="105" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">T</text>
+          <rect x="116" y="246" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="124" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <line x1="388" y1="110" x2="388" y2="101" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="388" cy="98" r="4.5" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="364" y="110" width="48" height="37" rx="11" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="379" cy="125" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="380" cy="126" r="2.4" fill="#2B2F38"/>
+          <circle cx="397" cy="125" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="398" cy="126" r="2.4" fill="#2B2F38"/>
+          <circle cx="372" cy="136" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="404" cy="136" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M382 136 Q388 141 394 136" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="371" y="149" width="34" height="18" rx="7" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="388" y="183" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent B</text>
+          <rect x="361" y="191" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="369" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="380" y="191" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="388" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">T</text>
+          <rect x="399" y="191" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="407" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <line x1="388" y1="245" x2="388" y2="236" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="388" cy="233" r="4.5" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="364" y="245" width="48" height="37" rx="11" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="379" cy="260" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="380" cy="261" r="2.4" fill="#2B2F38"/>
+          <circle cx="397" cy="260" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="398" cy="261" r="2.4" fill="#2B2F38"/>
+          <circle cx="372" cy="271" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="404" cy="271" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M382 271 Q388 276 394 271" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="371" y="284" width="34" height="18" rx="7" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="388" y="318" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent C</text>
+          <rect x="361" y="326" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="369" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="380" y="326" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="388" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">T</text>
+          <rect x="399" y="326" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="407" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <rect x="32" y="300" width="250" height="38" rx="14" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <path d="M97 301 L105 276 L113 301" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="157.0" y="324.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">Let’s meet Tuesday!</text>
+          <circle cx="302" cy="319" r="13" fill="#E5566B"/>
+          <path d="M297 314 L307 324 M307 314 L297 324" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <text x="240" y="384" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="600" fill="currentColor" fill-opacity=".7">A sees everyone’s messages, but ignores C</text>
+          <rect x="490" y="58" width="460" height="346" rx="18" style="fill:var(--multi-bg)"/>
+          <text x="720" y="88" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="15" font-weight="700" style="fill:var(--multi)">CAT: adapt while collaborating</text>
+          <rect x="662" y="118" width="168" height="36" rx="14" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <path d="M829 129.0 L842 136 L829 143.0" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="746.0" y="141.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">I’m free Tue and Wed.</text>
+          <rect x="662" y="252" width="168" height="36" rx="14" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4"/>
+          <path d="M829 263.0 L842 270 L829 277.0" style="fill:var(--paper);stroke:currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <text x="746.0" y="275.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">Only Wed works for me!</text>
+          <line x1="658" y1="142" x2="618" y2="186" stroke="currentColor" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tz)"/>
+          <line x1="658" y1="270" x2="622" y2="226" stroke="currentColor" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tz)"/>
+          <line x1="585" y1="165" x2="585" y2="156" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="585" cy="153" r="4.5" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="561" y="165" width="48" height="37" rx="11" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="576" cy="180" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="577" cy="181" r="2.4" fill="#2B2F38"/>
+          <circle cx="594" cy="180" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="595" cy="181" r="2.4" fill="#2B2F38"/>
+          <circle cx="569" cy="191" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="601" cy="191" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M579 191 Q585 196 591 191" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="568" y="204" width="34" height="18" rx="7" fill="#F7B98F" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="585" y="238" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent A</text>
+          <rect x="558" y="246" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="566" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="577" y="246" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="585" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">T</text>
+          <rect x="596" y="246" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="604" y="258" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <rect x="600" y="147" width="26" height="19" rx="6" style="fill:var(--multi-bg);stroke:var(--multi)" stroke-width="1.6"/>
+          <text x="613" y="161" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-weight="600" font-size="13" style="fill:var(--multi)">φ</text>
+          <path d="M632 139 L633.6 143.4 L638 145 L633.6 146.6 L632 151 L630.4 146.6 L626 145 L630.4 143.4Z" style="fill:var(--multi)"/>
+          <line x1="868" y1="110" x2="868" y2="101" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="868" cy="98" r="4.5" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="844" y="110" width="48" height="37" rx="11" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="859" cy="125" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="860" cy="126" r="2.4" fill="#2B2F38"/>
+          <circle cx="877" cy="125" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="878" cy="126" r="2.4" fill="#2B2F38"/>
+          <circle cx="852" cy="136" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="884" cy="136" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M862 136 Q868 141 874 136" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="851" y="149" width="34" height="18" rx="7" fill="#BBA8F3" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="868" y="183" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent B</text>
+          <rect x="841" y="191" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="849" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="860" y="191" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="868" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">T</text>
+          <rect x="879" y="191" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="887" y="203" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <rect x="883" y="92" width="26" height="19" rx="6" style="fill:var(--multi-bg);stroke:var(--multi)" stroke-width="1.6"/>
+          <text x="896" y="106" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-weight="600" font-size="13" style="fill:var(--multi)">φ</text>
+          <path d="M915 84 L916.6 88.4 L921 90 L916.6 91.6 L915 96 L913.4 91.6 L909 90 L913.4 88.4Z" style="fill:var(--multi)"/>
+          <line x1="868" y1="245" x2="868" y2="236" stroke="#2B2F38" stroke-width="2"/>
+          <circle cx="868" cy="233" r="4.5" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.6"/>
+          <rect x="844" y="245" width="48" height="37" rx="11" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.8"/>
+          <circle cx="859" cy="260" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="860" cy="261" r="2.4" fill="#2B2F38"/>
+          <circle cx="877" cy="260" r="5.2" fill="#fff" stroke="#2B2F38" stroke-width="1.2"/>
+          <circle cx="878" cy="261" r="2.4" fill="#2B2F38"/>
+          <circle cx="852" cy="271" r="3" fill="#F28B9B" opacity=".55"/>
+          <circle cx="884" cy="271" r="3" fill="#F28B9B" opacity=".55"/>
+          <path d="M862 271 Q868 276 874 271" fill="none" stroke="#2B2F38" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="851" y="284" width="34" height="18" rx="7" fill="#92C9F2" stroke="#2B2F38" stroke-width="1.8"/>
+          <text x="868" y="318" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="700" fill="currentColor">Agent C</text>
+          <rect x="841" y="326" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="849" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">M</text>
+          <rect x="860" y="326" width="16" height="16" rx="3" fill="#E6E8EC" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="868" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity=".4">T</text>
+          <rect x="879" y="326" width="16" height="16" rx="3" fill="#BDEBC8" stroke="#2B2F38" stroke-opacity=".5" stroke-width="1"/>
+          <text x="887" y="338" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9.5" font-weight="700" fill="#2B2F38" fill-opacity="1">W</text>
+          <rect x="883" y="227" width="26" height="19" rx="6" style="fill:var(--multi-bg);stroke:var(--multi)" stroke-width="1.6"/>
+          <text x="896" y="241" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-weight="600" font-size="13" style="fill:var(--multi)">φ</text>
+          <path d="M915 219 L916.6 223.4 L921 225 L916.6 226.6 L915 231 L913.4 226.6 L909 225 L913.4 223.4Z" style="fill:var(--multi)"/>
+          <rect x="512" y="300" width="250" height="38" rx="14" style="fill:var(--paper);stroke:var(--multi)" stroke-width="2"/>
+          <path d="M577 301 L585 276 L593 301" style="fill:var(--paper);stroke:var(--multi)" stroke-width="2" stroke-linejoin="round"/>
+          <text x="637.0" y="324.0" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" fill="currentColor">Let’s all meet Wednesday!</text>
+          <circle cx="782" cy="319" r="13" fill="#34B67A"/>
+          <path d="M776 319 L780.5 324 L788.5 314" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="720" y="384" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12.5" font-weight="600" style="fill:var(--multi)">each agent’s adapter φ is trained during the task</text>
         </svg>
       </div>
-      <figcaption>One adaptation point for agent <i>i</i>. The frozen base model builds a training target from what the agent can already see; only the agent's own adapter is updated; the adapted model then acts on the same context. Peer information crosses the dashed boundary only through messages.</figcaption>
-    </figure>
-
-    <ol class="steps">
-      <li><b>Build a target from visible information.</b>With its adapter off, the frozen base model drafts a contribution d, then reviews it under a fixed instruction q, checking claims, omissions and format, to produce the target y.</li>
-      <li><b>Update only this agent's adapter.</b>A teacher-forced loss on y (at most 256 supervised positions) updates φᵢ. The base model θ₀ never changes, and adapters are never shared between agents.</li>
-      <li><b>Act with the adapted model.</b>The agent generates its message or tool action from the original context with φᵢ⁺, and the action goes to its peers or the environment.</li>
-    </ol>
-    <p class="boundary">Each agent's information boundary is preserved: targets come only from its visible context, never from uncommunicated peer information, reference answers or future outcomes. Adapters persist across rounds within a task and reset between tasks.</p>
-  </div>
+          </figure>
+      </div>
 </section>
 
 <section id="publications">
@@ -300,6 +384,8 @@ footer{font-size:13px;color:var(--faint)}
         <p class="t"><a href="https://arxiv.org/pdf/2603.22754">PRISM: A Dual View of LLM Reasoning through Semantic Flow and Latent Computation</a></p>
         <p class="au"><b>Ruidi Chang</b>, Jiawei Zhou, Hanjie Chen</p>
         <p class="meta"><span class="dot single"></span><span class="venue">arXiv preprint</span></p>
+        <p class="note">Reasoning traces are usually studied either as text across steps or as hidden states across layers. PRISM models both at once: an explicit stage labels each step's semantic role (setup, computation, verification, answer) and models how roles flow, and an implicit stage finds latent computational regimes inside each step, linked across steps by a bridge matrix. Failed trajectories are more likely to get trapped in unproductive verification loops and split into distinct modes such as overthinking and premature commitment.</p>
+        <div class="thumb"><img src="PRISM_teaser.png" alt="PRISM: explicit semantic flow between reasoning steps and implicit computational regimes within each step, linked by a cross-step bridge" loading="lazy"></div>
       </div>
     </li>
     <li class="pub" data-k="single">
