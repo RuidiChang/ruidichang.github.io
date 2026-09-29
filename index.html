@@ -1,177 +1,379 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<div class="navbar">
-		<a href="./index.html"><font size="+1">Home</font></a>
-	</div>
-    <title>Ruidi Chang</title>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruidi Chang</title>
+<meta name="description" content="Ruidi Chang, Ph.D. student in Computer Science at Rice University. Understanding and improving language models, one model and many.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F6F7F9; --paper:#FFFFFF; --ink:#15171C; --muted:#5E6470; --faint:#8A909B; --line:#E2E5EA;
+  --single:#2F5BD3; --single-bg:#EDF1FC; --multi:#0E8A78; --multi-bg:#E7F5F2;
+  --display:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Public Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1115; --paper:#161920; --ink:#E7E9EE; --muted:#A0A7B4; --faint:#747B88; --line:#2A2F3A;
+    --single:#86A6FF; --single-bg:#1A2340; --multi:#45D0B9; --multi-bg:#12302B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1115; --paper:#161920; --ink:#E7E9EE; --muted:#A0A7B4; --faint:#747B88; --line:#2A2F3A;
+  --single:#86A6FF; --single-bg:#1A2340; --multi:#45D0B9; --multi-bg:#12302B;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{text-decoration-color:currentColor}
+a:focus-visible,button:focus-visible{outline:2px solid var(--single);outline-offset:3px;border-radius:2px}
+p{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;letter-spacing:-.01em;text-wrap:balance}
+
+.wrap{max-width:1120px;margin:0 auto;padding-inline:32px;padding-block:56px 72px;display:grid;grid-template-columns:240px 1fr;gap:64px}
+
+/* ---------- sidebar ---------- */
+aside{position:sticky;top:calc(40px + env(safe-area-inset-top,0px));align-self:start;display:flex;flex-direction:column;gap:18px}
+.photo{width:148px;height:148px;border-radius:50%;object-fit:cover;display:block;border:1px solid var(--line)}
+.name{font-family:var(--display);font-size:30px;line-height:1.1;font-weight:600}
+.role{font-size:14.5px;color:var(--muted);line-height:1.5}
+.links{display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.links a{text-decoration:none;display:flex;gap:10px;align-items:center;color:var(--ink)}
+.links a:hover span{text-decoration:underline;text-underline-offset:3px}
+.links svg{width:16px;height:16px;flex:none;color:var(--muted)}
+.email{font-family:var(--mono);font-size:13px;color:var(--muted);user-select:all}
+.nav{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:16px;font-size:14px}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+
+/* ---------- main ---------- */
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{min-width:0}
+.label{font:500 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+section > .label{display:block;margin-bottom:14px}
+
+/* research statement */
+.thesis{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);line-height:1.2;font-weight:400;max-width:24ch}
+.thesis em{font-style:normal;padding:0 .08em}
+.thesis .s{color:var(--single)} .thesis .m{color:var(--multi)}
+.bio{margin-top:20px;max-width:62ch;color:var(--muted)}
+.axes{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.axis{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+.axis .top{display:flex;align-items:center;gap:10px}
+.axis .top h3{font-size:20px}
+.glyph{width:34px;height:22px;flex:none}
+.axis dl{margin:0;display:grid;grid-template-columns:84px 1fr;row-gap:10px;column-gap:10px;font-size:15px}
+.axis dt{font:500 11.5px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.axis dd{margin:0}
+.axis .works{font-size:13.5px;color:var(--muted)}
+
+/* current project */
+.project{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:32px 34px;display:flex;flex-direction:column;gap:22px}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:3px}
+.chip.multi{color:var(--multi);background:var(--multi-bg)}
+.chip.single{color:var(--single);background:var(--single-bg)}
+.project h2{font-size:28px;line-height:1.2}
+.project h2 span{color:var(--muted);font-weight:400}
+.project .q{font-family:var(--display);font-style:italic;font-size:20px;line-height:1.45;border-left:3px solid var(--multi);padding-left:16px;max-width:60ch}
+.project p{max-width:68ch}
+figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.diagram{overflow-x:auto;border:1px solid var(--line);border-radius:6px;padding:14px 10px 6px;background:var(--bg)}
+.diagram svg{display:block;width:100%;min-width:640px;height:auto;color:var(--ink)}
+figcaption{font-size:14px;color:var(--muted);max-width:72ch}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.steps li::before{content:counter(s);font:500 13px/1 var(--mono);color:var(--multi);border:1.5px solid var(--multi);border-radius:50%;width:26px;height:26px;display:grid;place-items:center}
+.steps b{font-weight:600}
+.boundary{font-size:14.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:16px}
+
+/* publications */
+.pubhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.filters{display:flex;gap:6px}
+.filters button{font:500 12px/1 var(--mono);letter-spacing:.04em;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.filters button[data-f="single"][aria-pressed="true"]{background:var(--single);border-color:var(--single)}
+.filters button[data-f="multi"][aria-pressed="true"]{background:var(--multi);border-color:var(--multi)}
+.pubs{list-style:none;margin:0;padding:0}
+.pub{display:grid;grid-template-columns:62px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.pub .yr{font:500 13px/1.6 var(--mono);color:var(--faint);font-variant-numeric:tabular-nums}
+.pub .body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.pub .t{font-family:var(--display);font-size:18.5px;line-height:1.35;font-weight:500}
+.pub .t a{text-decoration:none}
+.pub .t a:hover{text-decoration:underline;text-decoration-color:currentColor}
+.pub .au{font-size:14.5px;color:var(--muted)}
+.pub .au b{color:var(--ink);font-weight:600}
+.pub .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
+.pub .venue{font-weight:600}
+.pub .note{font-size:15px;max-width:66ch;margin-top:4px}
+.pub .thumb{margin-top:10px;max-width:520px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px}
+.pub .thumb img{display:block;width:100%;height:auto}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+.dot.single{background:var(--single)} .dot.multi{background:var(--multi)}
+
+/* service */
+.svc{display:grid;grid-template-columns:120px 1fr;gap:10px 18px;font-size:15px}
+.svc dt{font:500 12px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.svc dd{margin:0}
+footer{font-size:13px;color:var(--faint)}
+
+@media (max-width: 860px){
+  .wrap{grid-template-columns:1fr;gap:40px;padding-inline:20px;padding-block:32px 56px}
+  aside{position:static;display:grid;grid-template-columns:auto 1fr;column-gap:20px;row-gap:12px;align-items:center}
+  .photo{width:96px;height:96px;grid-row:span 2}
+  .links,.nav,.email-wrap{grid-column:1 / -1}
+  .nav{display:none}
+  .links{flex-direction:row;flex-wrap:wrap;gap:8px 18px}
+  .axes,.steps{grid-template-columns:1fr}
+  .project{padding:22px 18px}
+}
+@media (max-width: 480px){
+  .pub{grid-template-columns:1fr;gap:4px}
+  .svc{grid-template-columns:1fr;gap:2px}
+  .svc dd{margin-bottom:10px}
+}
+</style>
 </head>
-<body style="color: rgba(0, 0, 0, 0.938);margin:0;padding:0">
-<div id="wrapper">
-  <div id="content-wrap">
-    <div id="content">
-      <div id="main">
-        <tr>
-        <p style="padding-right:30px;"> <img id="headshot" "float-right" align="right" alt="Ruidi Chang" src="ruidi2.jpg" width="180" height="185"/></p>
+<body>
 
-            <p><font size="+3"><strong>&nbsp;Ruidi Chang</strong></font></p>
-            <p></p>
-            <p style="line-height:90%"><font size="3"><a href="https://csweb.rice.edu/" style="color:#Ad5F04;">&nbsp;&nbsp;Department of Computer Science</a></font></p>
-            <p style="line-height:90%"><font size="3"><a href="https://www.rice.edu/" style="color:#Ad5F04;">&nbsp;&nbsp;Rice University</a></font></p>
-            <p style="line-height:90%"><font size="3"><strong>&nbsp;&nbsp;Address:</strong> Duncan Hall, 6100 Main St, Houston, TX 77005</font></p>
-            <p style="line-height:90%"><font size="3"><strong>&nbsp;&nbsp;Email:</strong> rc151@rice.edu</font></p>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-            &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://scholar.google.com/citations?user=gquBcSkAAAAJ"><i class="ai ai-google-scholar ai-2x" style="font-size:26px; color:black">&nbsp;</i></a>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <a href="https://github.com/RuidiChang"><i class="fa fa-github" style="font-size:26px ;color:black">&nbsp;</i></a>
-            <a href="https://x.com/ChangRuidi53250"><i class="fa fa-twitter" style="font-size:26px ;color:black">&nbsp;</i></a>
-	    <a href="https://www.linkedin.com/in/ruidi-chang/"><i class="fa fa-linkedin-square" style="font-size:26px ;color:black">&nbsp;</i></a>
-        <!-- <p></p> -->
 
-        </tr>
-		<hr style="color:rgb(218, 218, 218);">
+<div class="wrap">
+<aside>
+  <img class="photo" src="ruidi2.jpg" alt="Ruidi Chang">
+  <div>
+    <p class="name">Ruidi Chang</p>
+    <p class="role">Ph.D. student, Computer Science<br><a href="https://csweb.rice.edu/">Rice University</a></p>
+  </div>
+  <div class="email-wrap"><span class="email">rc151@rice.edu</span></div>
+  <nav class="links" aria-label="Profiles">
+    <a href="https://scholar.google.com/citations?user=gquBcSkAAAAJ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.8 9.3v3.2L12 19l6.8-3.5v-3.2L12 16l-6.8-3.7z"/></svg><span>Google Scholar</span></a>
+    <a href="https://github.com/RuidiChang"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
+    <a href="https://x.com/ChangRuidi53250"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3.1l-6.8 7.7 8 10.3h-6.2l-4.9-6.3L5.3 21H2.2l7.3-8.3L1.8 3h6.4l4.4 5.8L17.7 3zm-1.1 16.2h1.7L7.5 4.7H5.7l10.9 14.5z"/></svg><span>X / Twitter</span></a>
+    <a href="https://www.linkedin.com/in/ruidi-chang/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9.5z"/></svg><span>LinkedIn</span></a>
+  </nav>
+  <nav class="nav" aria-label="Sections">
+    <a href="#research">Research</a>
+    <a href="#current">Current project</a>
+    <a href="#publications">Publications</a>
+    <a href="#service">Service</a>
+  </nav>
+</aside>
 
-        <h1><a name="biography">About Me</a></h1>
-        <p>
-			I’m a second-year CS Ph.D. student at 
-			<a href="https://csweb.rice.edu/" style="color:#Ad5F04;">Rice University</a>, 
-			advised by Prof. 
-			<a href="https://hanjiechen.github.io/index.html" style="color:#Ad5F04;">Hanjie Chen</a>. 
-			I’m interested in interpretable machine learning and multi-agent self-evolving systems. 
-			Before Rice, I earned my master’s degree at 
-			<a href="https://www.cmu.edu/" style="color:#Ad5F04;">Carnegie Mellon University</a>.
-		</p>
-        <h1><a name="publication">Publications</a></h1>
-			<ul>
-			  <li>
-			    <a href="https://arxiv.org/pdf/2507.05158" style="color:#Ad5F04;">Steering Information Utility in Key-Value Memory for Language Model Post-Training</a><br>
-			    <em>Chunyuan Deng, <b>Ruidi Chang</b>, Hanjie Chen</em><br>
-			    <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 2025.
-			  </li>
-			
-			  <li>
-			    <a href="https://arxiv.org/pdf/2506.06686" style="color:#Ad5F04;">Learning Distribution-wise Control in Representation Space for Language Models</a><br>
-			    <em>Chunyuan Deng, <b>Ruidi Chang</b>, Hanjie Chen</em><br>
-			    <em>International Conference on Machine Learning (ICML)</em>, 2025.
-			  </li>
-			
-			 <li>
-				  <a href="https://arxiv.org/pdf/2501.16374" style="color:#Ad5F04;">
-				    SAFR: Neuron Redistribution for Interpretability
-				  </a><br>
-				  <em><b>Ruidi Chang</b>, Chunyuan Deng, Hanjie Chen</em><br>
-				  <em>North American Chapter of the Association for Computational Linguistics (NAACL) Findings</em>, 2025.
-				
-				  <div style="
-				    margin-top:12px;
-				    padding:15px;
-				    border:1px solid #Ad5F04;
-				    border-radius:10px;
-				    background-color:#f9fafb;
-				    box-shadow:0 2px 6px rgba(0,0,0,0.05);
-				    display:flex;
-				    align-items:flex-start;
-				    gap:15px;
-				  ">
-				    <!-- Text left -->
-				    <div style="flex:1;">
-				      <p style="margin:0 0 6px 0; line-height:1.35;">
-				        🧠 Neurons often mix too many features (superposition) — making models a black box.<br>
-						<br>
-				        🎯 <strong>SAFR</strong> strategically redistributes neurons:<br>
-						<br>
-				      </p>
-				      <ul style="margin:0 0 8px 20px; line-height:1.3; list-style-position:outside;">
-						  <li> Monosemantic for important tokens</li>
-						  <li> Polysemantic where interactions matter</li>
-					  </ul>
-				    </div>
-				
-				    <!-- Figure right -->
-				    <figure style="margin:0; flex:0 0 35%; text-align:center;">
-				      <img src="SAFR_workflow.png" alt="Workflow of SAFR" style="max-width:100%; height:auto; border-radius:8px;">
-				      <figcaption style="font-size:0.8em; color:#Ad5F04; margin-top:4px;">
-				        <em>SAFR improves interpretability.</em>
-				      </figcaption>
-				    </figure>
-				  </div>
-				</li>
-				
-				
-				<li>
-				  <a href="https://arxiv.org/pdf/2507.05387" style="color:#Ad5F04;">
-				    The Generalization Ridge: Information Flow in Natural Language Generation
-				  </a><br>
-				  <em><b>Ruidi Chang</b>, Chunyuan Deng, Hanjie Chen</em><br>
-				  <em>arXiv preprint, 2026</em>
-				
-				  <div style="
-				    margin-top:12px;
-				    padding:15px;
-				    border:1px solid #Ad5F04;
-				    border-radius:10px;
-				    background-color:#f9fafb;
-				    box-shadow:0 2px 6px rgba(0,0,0,0.05);
-				  ">
-				    <!-- Text first -->
-				    <p style="margin:0 0 6px 0; line-height:1.35;">
-				      🔍 Models aren’t just monotonically better deeper, they show a <strong>ridge of generalization</strong> in intermidiate layers.<br>
-				      <br>
-					  ✂️ <strong>InfoRidge</strong> is an information-theoretic lens to trace how predictive information flows across depth.<br>
-					  <br>
-				    </p>
-				    <ul style="margin:0 8px 8px 20px; line-height:1.3;">
-				      <li> Predictive information peaks in upper-middle layers (the “ridge”), where models exhibit stronger generalization behavior, then drops in final layers.</li>
-				      <li> Residual scaling probes show that under distribution shift, models downweight deep layers and rely more on intermediate layers.</li>
-				    </ul>
-				
-				    <!-- Figure bottom -->
-				    <figure style="margin:10px 0 0 0; text-align:center;">
-				      <img src="InfoRidge_workflow.png" alt="Generalization Ridge diagram" style="max-width:80%; height:auto; border-radius:8px;">
-				      <figcaption style="font-size:0.8em; color:#Ad5F04; margin-top:4px;">
-				        <em>InfoRidge identifies the generalization ridge — an intermidiate-layer peak in predictive information.</em>
-				      </figcaption>
-				    </figure>
-				  </div>
-				</li>
+<main>
 
-			  <li>
-			    <a href="https://arxiv.org/pdf/2603.22754" style="color:#Ad5F04;">PRISM: A Dual View of LLM Reasoning through Semantic Flow and Latent Computation</a><br>
-			    <em><b>Ruidi Chang</b>, Jiawei Zhou, Hanjie Chen</em><br>
-			    <em>arXiv preprint</em>.
-			  </li>
-				
-			  <li>
-			    <a href="https://arxiv.org/pdf/2402.01680" style="color:#Ad5F04;">Large Language Model Based Multi-Agents: A Survey of Progress and Challenges</a><br>
-			    <em>Taicheng Guo, Xiuying Chen, Yaqi Wang, <b>Ruidi Chang</b>, Shichao Pei, Nitesh V. Chawla, Olaf Wiest, Xiangliang Zhang</em><br>
-			    <em>International Joint Conference on Artificial Intelligence (IJCAI)</em>, 2024.
-			  </li>
-
-			  <li>
-			    <a href="https://arxiv.org/pdf/2410.15580" style="color:#Ad5F04;">Language Models are Symbolic Learners in Arithmetic</a><br>
-			    <em>Chunyuan Deng, Zhiqi Li, Roy Xie, <b>Ruidi Chang</b>, Hanjie Chen</em><br>
-			    <em>In submission (Transactions on Machine Learning Research, TMLR).</em>
-			  </li>
-			</ul>
-
-	<h1><a name="services">Services</a></h1>
-          <ul>
-                <li> <b>Reviewer:</b> ACL ARR 2025 Feb, IEEE BigData 2025, EMNLP BlackboxNLP Workshop 2025, COLM XLLM-Reason-Plan Workshop 2025, COLING 2025
-                <li> <b>Volunteer:</b> EMNLP BlackboxNLP Workshop 2024
-				<li> <b>Mentoring:</b> Nursultan Asilbekov (SURF Program)
-              </ul>
-          </ul> 
-	      
-		<hr style="color:rgb(218, 218, 218);">
-		<div style="text-align: center; font-size: 18px;"><small>Last update: 10/2025</small>
-		</div>
-		<br>
-      </div>
+<section id="research">
+  <span class="label">Research</span>
+  <h1 class="thesis">I study how language models work and how to make them better, as a <em class="s">single model</em> and as <em class="m">many models</em> working together.</h1>
+  <p class="bio">I'm a Ph.D. student in Computer Science at Rice University.</p>
+  <div class="axes">
+    <div class="axis">
+      <div class="top"><svg class="glyph" viewBox="0 0 34 22" aria-hidden="true"><circle cx="17" cy="11" r="8" fill="none" stroke-width="2" style="stroke:var(--single)"/><circle cx="17" cy="11" r="3" style="fill:var(--single)"/></svg><h3>Single model</h3></div>
+      <dl>
+        <dt>Understand</dt><dd>How information flows across layers, how reasoning is computed, and how neurons encode features.</dd>
+        <dt>Improve</dt><dd>Controlling models through their representations and memory during post-training.</dd>
+      </dl>
+    </div>
+    <div class="axis">
+      <div class="top"><svg class="glyph" viewBox="0 0 34 22" aria-hidden="true"><line x1="8" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="26" y1="15" x2="17" y2="6" stroke-width="1.6" style="stroke:var(--multi)"/><line x1="8" y1="15" x2="26" y2="15" stroke-width="1.6" style="stroke:var(--multi)"/><circle cx="17" cy="6" r="4" style="fill:var(--multi)"/><circle cx="8" cy="15" r="4" style="fill:var(--multi)"/><circle cx="26" cy="15" r="4" style="fill:var(--multi)"/></svg><h3>Multiple models</h3></div>
+      <dl>
+        <dt>Understand</dt><dd>When a team of language-model agents actually integrates the information its members hold.</dd>
+        <dt>Improve</dt><dd>Adapting each agent while it collaborates, so the team uses what it collectively knows.</dd>
+      </dl>
     </div>
   </div>
+</section>
+
+<section id="current">
+  <span class="label">Current project</span>
+  <div class="project">
+    <span class="chip multi"><span class="dot multi"></span>Multi-agents</span>
+    <h2>CAT: Collaborative Adaptation at Test-time</h2>
+    <p>Multi-agent language-model systems must do more than divide a problem among several models. Their collective intelligence depends on communications between each agent. (补一句为什么training，比如是改变了模型面对问题时作出的协作行为。).</p>
+    <p class="q">Can training during the current task improve a collaborating team's performance beyond providing the same information in context?</p>
+
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 960 372" role="img" aria-label="One CAT adaptation step for agent i: the frozen base model drafts and reviews a contribution from the agent's visible context to build a target, the target updates only agent i's adapter, and the adapted model then acts on the same context; the action goes to peers, whose replies re-enter the context only through communication.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker>
+            <marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" style="fill:var(--multi)"/></marker>
+          </defs>
+          <!-- information boundary -->
+          <rect x="12" y="34" width="758" height="292" rx="10" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="5 5"/>
+          <text x="26" y="56" font-family="JetBrains Mono, monospace" font-size="12" fill="currentColor" fill-opacity=".7">AGENT i · sees only its own context</text>
+          <text x="400" y="62" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" fill="currentColor" fill-opacity=".6">adapter off · frozen θ₀</text>
+
+          <!-- context -->
+          <rect x="30" y="80" width="150" height="200" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
+          <text x="105" y="104" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">Visible context</text>
+          <text x="105" y="122" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="14" fill="currentColor">hᵢ,ₜ</text>
+          <g font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">
+            <text x="46" y="156">task instructions</text>
+            <text x="46" y="180">own documents</text>
+            <text x="46" y="204">messages received</text>
+            <text x="46" y="228">tool results</text>
+          </g>
+
+          <!-- top lane: build target with frozen base -->
+          <rect x="220" y="72" width="140" height="56" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
+          <text x="290" y="96" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ drafts</text>
+          <text x="290" y="114" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">contribution d</text>
+          <rect x="420" y="72" width="140" height="56" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
+          <text x="490" y="96" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ reviews d</text>
+          <text x="490" y="114" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">with instruction q</text>
+          <line x1="180" y1="100" x2="216" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
+          <line x1="360" y1="100" x2="416" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
+          <text x="388" y="92" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="13" fill="currentColor">d</text>
+
+          <!-- adapter update -->
+          <rect x="600" y="66" width="152" height="68" rx="6" stroke-width="1.8" style="fill:var(--multi-bg);stroke:var(--multi)"/>
+          <text x="676" y="90" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" style="fill:var(--multi)">Update adapter φᵢ</text>
+          <text x="676" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">teacher-forced loss</text>
+          <text x="676" y="124" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">≤ 256 positions</text>
+          <line x1="560" y1="100" x2="596" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
+          <text x="578" y="92" text-anchor="middle" font-family="Literata, serif" font-style="italic" font-size="13" fill="currentColor">y</text>
+
+          <!-- updated adapter feeds the acting model -->
+          <polyline points="676,134 676,186 490,186 490,236" fill="none" stroke-width="1.8" marker-end="url(#ahm)" style="stroke:var(--multi)"/>
+          <text x="690" y="170" font-family="Literata, serif" font-style="italic" font-size="13" style="fill:var(--multi)">φᵢ⁺</text>
+
+          <!-- bottom lane: act with adapted model on the same context -->
+          <rect x="420" y="240" width="140" height="56" rx="6" stroke-width="1.8" style="fill:var(--paper);stroke:var(--multi)"/>
+          <text x="490" y="264" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">θ₀ + φᵢ⁺ acts</text>
+          <text x="490" y="282" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">on the same hᵢ,ₜ</text>
+          <line x1="180" y1="268" x2="416" y2="268" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
+
+          <!-- peers -->
+          <rect x="806" y="226" width="140" height="84" rx="6" stroke="currentColor" stroke-width="1.4" style="fill:var(--paper)"/>
+          <text x="876" y="252" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="13" font-weight="600" fill="currentColor">Other agents</text>
+          <text x="876" y="270" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">own adapters φⱼ</text>
+          <text x="876" y="288" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".75">or tool environment</text>
+          <line x1="560" y1="268" x2="802" y2="268" stroke="currentColor" stroke-width="1.4" marker-end="url(#ah)"/>
+          <text x="682" y="260" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor">sends aᵢ,ₜ</text>
+
+          <!-- replies return only through communication -->
+          <polyline points="876,310 876,346 105,346 105,284" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+          <text x="490" y="364" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" fill="currentColor" fill-opacity=".8">replies enter hᵢ,ₜ₊₁ only when communicated</text>
+        </svg>
+      </div>
+      <figcaption>One adaptation point for agent <i>i</i>. The frozen base model builds a training target from what the agent can already see; only the agent's own adapter is updated; the adapted model then acts on the same context. Peer information crosses the dashed boundary only through messages.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li><b>Build a target from visible information.</b>With its adapter off, the frozen base model drafts a contribution d, then reviews it under a fixed instruction q, checking claims, omissions and format, to produce the target y.</li>
+      <li><b>Update only this agent's adapter.</b>A teacher-forced loss on y (at most 256 supervised positions) updates φᵢ. The base model θ₀ never changes, and adapters are never shared between agents.</li>
+      <li><b>Act with the adapted model.</b>The agent generates its message or tool action from the original context with φᵢ⁺, and the action goes to its peers or the environment.</li>
+    </ol>
+    <p class="boundary">Each agent's information boundary is preserved: targets come only from its visible context, never from uncommunicated peer information, reference answers or future outcomes. Adapters persist across rounds within a task and reset between tasks.</p>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="pubhead">
+    <span class="label">Publications</span>
+    <div class="filters" role="group" aria-label="Filter publications">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+      <button type="button" id="f-single" data-f="single" aria-pressed="false">Single model</button>
+      <button type="button" id="f-multi" data-f="multi" aria-pressed="false">Multiple models</button>
+    </div>
+  </div>
+  <ol class="pubs">
+    <li class="pub" data-k="single">
+      <span class="yr">2026</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2507.05387">The Generalization Ridge: Information Flow in Natural Language Generation</a></p>
+        <p class="au"><b>Ruidi Chang</b>, Chunyuan Deng, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">COLM 2026</span></p>
+        <p class="note">Models are not monotonically better with depth. InfoRidge traces predictive information across layers: it peaks in the upper-middle layers, a "ridge" where generalization is strongest, then drops in the final layers. Under distribution shift, models down-weight deep layers and rely more on the intermediate ones.</p>
+        <div class="thumb"><img src="InfoRidge_workflow.png" alt="InfoRidge: predictive information across layers peaks at an intermediate ridge" loading="lazy"></div>
+      </div>
+    </li>
+    <li class="pub" data-k="single">
+      <span class="yr">2026</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2603.22754">PRISM: A Dual View of LLM Reasoning through Semantic Flow and Latent Computation</a></p>
+        <p class="au"><b>Ruidi Chang</b>, Jiawei Zhou, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">arXiv preprint</span></p>
+      </div>
+    </li>
+    <li class="pub" data-k="single">
+      <span class="yr">2025</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2507.05158">Steering Information Utility in Key-Value Memory for Language Model Post-Training</a></p>
+        <p class="au">Chunyuan Deng, <b>Ruidi Chang</b>, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">NeurIPS 2025</span></p>
+      </div>
+    </li>
+    <li class="pub" data-k="single">
+      <span class="yr">2025</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2506.06686">Learning Distribution-wise Control in Representation Space for Language Models</a></p>
+        <p class="au">Chunyuan Deng, <b>Ruidi Chang</b>, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">ICML 2025</span></p>
+      </div>
+    </li>
+    <li class="pub" data-k="single">
+      <span class="yr">2025</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2501.16374">SAFR: Neuron Redistribution for Interpretability</a></p>
+        <p class="au"><b>Ruidi Chang</b>, Chunyuan Deng, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">NAACL 2025 Findings</span></p>
+        <p class="note">Neurons often mix many features at once (superposition). SAFR redistributes them: monosemantic for important tokens, polysemantic where interactions matter, which makes the model more interpretable.</p>
+        <div class="thumb"><img src="SAFR_workflow.png" alt="Workflow of SAFR neuron redistribution" loading="lazy"></div>
+      </div>
+    </li>
+    <li class="pub" data-k="single">
+      <span class="yr">—</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2410.15580">Language Models are Symbolic Learners in Arithmetic</a></p>
+        <p class="au">Chunyuan Deng, Zhiqi Li, Roy Xie, <b>Ruidi Chang</b>, Hanjie Chen</p>
+        <p class="meta"><span class="dot single"></span><span class="venue">TMLR 2026</span></p>
+      </div>
+    </li>
+    <li class="pub" data-k="multi">
+      <span class="yr">2024</span>
+      <div class="body">
+        <p class="t"><a href="https://arxiv.org/pdf/2402.01680">Large Language Model Based Multi-Agents: A Survey of Progress and Challenges</a></p>
+        <p class="au">Taicheng Guo, Xiuying Chen, Yaqi Wang, <b>Ruidi Chang</b>, Shichao Pei, Nitesh V. Chawla, Olaf Wiest, Xiangliang Zhang</p>
+        <p class="meta"><span class="dot multi"></span><span class="venue">IJCAI 2024</span></p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section id="service">
+  <span class="label">Service</span>
+  <dl class="svc">
+    <dt>Reviewer</dt><dd>ACL ARR 2025 Feb, IEEE BigData 2025, EMNLP BlackboxNLP Workshop 2025, COLM XLLM-Reason-Plan Workshop 2025, COLING 2025</dd>
+    <dt>Volunteer</dt><dd>EMNLP BlackboxNLP Workshop 2024</dd>
+    <dt>Mentoring</dt><dd>Nursultan Asilbekov (SURF Program)</dd>
+  </dl>
+</section>
+
+<footer>Duncan Hall, 6100 Main St, Houston, TX 77005 · Last updated 09/2026</footer>
+</main>
 </div>
+
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.filters button'));
+  var pubs=[].slice.call(document.querySelectorAll('.pub'));
+  function apply(f){
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.f===f?'true':'false')});
+    pubs.forEach(function(p){p.hidden=!(f==='all'||p.dataset.k===f)});
+    try{localStorage.setItem('pubfilter',f)}catch(e){}
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.f)})});
+  var saved='all';try{saved=localStorage.getItem('pubfilter')||'all'}catch(e){}
+  apply(saved);
+})();
+</script>
 
 </body>
 </html>
